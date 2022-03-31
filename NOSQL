@@ -17,8 +17,7 @@ db.users.find({studying: 'js'})
 db.users.updateMany({studying: {$size: 1}}, {$push: {studying: 'java'}})
 
 // 5) Знайти всіх юзерів номера будинків яких знаходяться в межах 1-20
-db.users.find(
-    {
+db.users.find({
         $and: [
             {'address.house': {$gte: 1}},
             {"address.house": {$lte: 20}}
@@ -26,7 +25,7 @@ db.users.find(
     })
 
 // 6) Знайти всіх юзерів в яких назва вулиці містить пробіл
-db.users.find({'address.street': /.+ .+/})
+db.users.find({'address.street': /.+\s.+/})
 
 // 7) Видалити всіх юзерів в котрих немає поля studying
 db.users.deleteMany({studying: {$exists: 0}})
@@ -42,3 +41,4 @@ db.users.updateMany(
 
 // 10) Посортувати юзерів по рейтингу та по номеру квартири (що то що то, від більшого меншого)
 db.users.find().sort({rating: -1, 'address.flat': -1})
+
